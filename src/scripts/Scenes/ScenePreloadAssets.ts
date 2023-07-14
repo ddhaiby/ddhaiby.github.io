@@ -24,9 +24,6 @@ export class ScenePreloadAssets extends Phaser.Scene
         this.preloadAudio();
         this.preloadBackground();
         this.preloadCard();
-
-        this.load.setPath("./assets/");
-        this.load.image("smallburger", "smallburger.png");
     }
 
     private preloadAudio(): void
@@ -45,7 +42,6 @@ export class ScenePreloadAssets extends Phaser.Scene
     private preloadCard(): void
     {
         this.load.setPath("assets/cards/");
-        this.load.image("Welly_Hidden", "Welly_Hidden.png");
         this.load.image("Welly_1", "Welly_127.png");
         this.load.image("Welly_2", "Welly_2379.png");
         this.load.image("Welly_3", "Welly_2925.png");
@@ -58,6 +54,7 @@ export class ScenePreloadAssets extends Phaser.Scene
         this.load.image("Welly_10", "Welly_3928.png");
         this.load.image("Welly_11", "Welly_3953.png");
         this.load.image("Welly_12", "Welly_4003.png");
+        this.load.image("Welly_Hidden", "Welly_Hidden.png");
     }
 
     // Create
