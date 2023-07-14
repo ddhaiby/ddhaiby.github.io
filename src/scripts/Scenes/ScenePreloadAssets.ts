@@ -32,7 +32,7 @@ export class ScenePreloadAssets extends Phaser.Scene
     private preloadAudio(): void
     {
         this.load.setPath("./assets/audio/");
-        this.load.audio("GUINEA PIGS CITY", "GUINEA PIGS CITY.mp3");
+        // this.load.audio("GUINEA PIGS CITY", "GUINEA PIGS CITY.mp3");
     }
 
     private preloadBackground(): void
@@ -44,7 +44,7 @@ export class ScenePreloadAssets extends Phaser.Scene
 
     private preloadCard(): void
     {
-        this.load.setPath("./assets/cards/");
+        this.load.setPath("assets/cards/");
         this.load.image("Welly_Hidden", "Welly_Hidden.png");
         this.load.image("Welly_1", "Welly_127.png");
         this.load.image("Welly_2", "Welly_2379.png");
@@ -65,10 +65,12 @@ export class ScenePreloadAssets extends Phaser.Scene
   
     public create() : void
     {
+        this.input.setDefaultCursor("url(assets/cursors/cursorWellyNormal.cur), pointer");
+
         this.initDimensions();
 
-        this.scene.add(CST.SCENES.UI, SceneUI, true, null);
-        this.scene.add(CST.SCENES.GAME, SceneGame, true, null);
+        this.scene.add(CST.SCENES.UI, SceneUI, true, undefined);
+        this.scene.add(CST.SCENES.GAME, SceneGame, true, undefined);
 
         this.scene.bringToTop(CST.SCENES.UI);
         this.scene.remove(CST.SCENES.PRELOAD_ASSETS);

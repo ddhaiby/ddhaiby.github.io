@@ -27,9 +27,9 @@ export class WELLY_ImageButton extends Phaser.GameObjects.Image
     protected tintPressed: number = CST.STYLE.BUTTON.TINT.PRESSED;
     protected tintHovered: number = CST.STYLE.BUTTON.TINT.HOVERED;
 
-    protected textureNormal: string = undefined;
-    protected texturePressed: string = undefined;
-    protected textureHovered: string = undefined;
+    protected textureNormal: string;
+    protected texturePressed: string | undefined;
+    protected textureHovered: string | undefined;
 
     protected toolTipText: string = "";
 
@@ -44,7 +44,7 @@ export class WELLY_ImageButton extends Phaser.GameObjects.Image
             hitArea: new Phaser.Geom.Rectangle(0, 0, this.displayWidth, this.displayHeight),
             hitAreaCallback: Phaser.Geom.Rectangle.Contains,
             pixelPerfect: style.pixelPerfect,
-            cursor: "url(assets/cursors/icono-selectedstatic.cur), pointer"
+            cursor: "url(assets/cursors/cursorWellyHovered.cur), pointer"
         });
 
         const outlinePlugin = scene.plugins.get('rexOutlinePipeline') as OutlinePipelinePlugin;

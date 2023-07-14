@@ -3,7 +3,7 @@ import { Label, PerspectiveCard } from 'phaser3-rex-plugins/templates/ui/ui-comp
 
 export class WELLY_Card extends PerspectiveCard
 {
-    private frontImageButton: WELLY_ImageButton = undefined;
+    private frontImageButton: WELLY_ImageButton;
     private id: number = -1;
 
     constructor(scene: Phaser.Scene, id: number, x: number, y: number, frontTexture: string, backTexture: string, cardSize: number)

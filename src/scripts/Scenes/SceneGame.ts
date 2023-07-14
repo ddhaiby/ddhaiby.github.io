@@ -12,8 +12,8 @@ export class SceneGame extends WELLY_Scene
 
     private cards: WELLY_Card[] = [];
 
-    private firstCard: WELLY_Card = undefined;
-    private secondCard: WELLY_Card = undefined;
+    private firstCard: WELLY_Card | undefined;
+    private secondCard: WELLY_Card | undefined;
 
     private remainCardCount: number = 0;
 
@@ -48,8 +48,8 @@ export class SceneGame extends WELLY_Scene
     {
         super.create();
 
-        this.audioWorldMap = this.sound.add("GUINEA PIGS CITY", { volume: 0.05, loop: true });
-        this.audioWorldMap.play();
+        // this.audioWorldMap = this.sound.add("GUINEA PIGS CITY", { volume: 0.05, loop: true });
+        // this.audioWorldMap.play();
 
         this.initUI();
 
@@ -78,7 +78,7 @@ export class SceneGame extends WELLY_Scene
 
     private createBoard(): void
     {
-        let availableCards = [];
+        let availableCards = [] as { index: number; count: number; }[];
 
         const columns = CST.GAME.LEVELS[this.currentLevel].COLUMNS;
         const rows = CST.GAME.LEVELS[this.currentLevel].ROWS;
@@ -148,13 +148,13 @@ export class SceneGame extends WELLY_Scene
     {
         this.turnBackAllCards();
 
-        this.cards[0].flip.once("complete", () =>
+        this.cards[0].flip?.once("complete", () =>
         {
             this.time.delayedCall(CST.GAME.LEVELS[this.currentLevel].DURATION_SHOW_CARDS, () =>
             {
                 this.turnFrontAllCards();
 
-                this.cards[0].flip.once("complete", () => {
+                this.cards[0].flip?.once("complete", () => {
                     this.isGameInProgress = true;
                 }, this);
             } , undefined, this);
@@ -193,7 +193,7 @@ export class SceneGame extends WELLY_Scene
         {
             if (card.face == faceToTurn)
             {
-                card.flip.flip();
+                card.flip?.flip();
             }
         }
     }
@@ -202,10 +202,10 @@ export class SceneGame extends WELLY_Scene
     {
         const canFlipCard = (this.firstCard == undefined) || (this.secondCard == undefined);
 
-        if (canFlipCard)
+        if (canFlipCard && card)
         {
             card.disable();
-            card.flip.flip();
+            card.flip?.flip();
 
             if (this.firstCard == undefined)
             {
@@ -214,14 +214,14 @@ export class SceneGame extends WELLY_Scene
             else
             {
                 this.secondCard = card;
-                this.secondCard.flip.once("complete", () => { this.checkFlippedCards(this.firstCard, this.secondCard); }, this);
+                this.secondCard.flip?.once("complete", () => { this.checkFlippedCards(this.firstCard as WELLY_Card, this.secondCard as WELLY_Card); }, this);
             }
         }
     }
 
     private checkFlippedCards(card1: WELLY_Card, card2: WELLY_Card): void
     {
-        if (this.isMatching(card1, this.secondCard))
+        if (this.isMatching(card1, this.secondCard as WELLY_Card))
         {
             this.hideCard(card1);
             this.hideCard(card2);
@@ -238,10 +238,10 @@ export class SceneGame extends WELLY_Scene
             this.firstCard = undefined;
             this.secondCard = undefined;
 
-            card1.flip.flip(250);
-            card2.flip.flip(250);
+            card1.flip?.flip(250);
+            card2.flip?.flip(250);
 
-            card2.flip.once("complete", () => {
+            card2.flip?.once("complete", () => {
                 card1.enable();
                 card2.enable();
             }, this);

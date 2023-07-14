@@ -21,10 +21,15 @@ export class WELLY_Utils
         });
         
         const result = (/^(?:#|0x)?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i).exec(stringColor);
-        const r = parseInt(result[1], 16);
-        const g = parseInt(result[2], 16);
-        const b = parseInt(result[3], 16);
 
-        return (r << 16) + (g << 8) + b;
+        if (result)
+        {
+            const r = parseInt(result[1], 16);
+            const g = parseInt(result[2], 16);
+            const b = parseInt(result[3], 16);
+
+            return (r << 16) + (g << 8) + b;
+        }
+        return 0;        
     }
 }

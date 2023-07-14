@@ -16,8 +16,8 @@ export class WELLY_TextButton extends Phaser.GameObjects.Container
     protected textOffsetHoveredY: number = -10;
     protected textOffsetPressedY: number = -1;
 
-    protected buttonText: Phaser.GameObjects.Text = undefined;
-    protected buttonImage: Phaser.GameObjects.Image = undefined;
+    protected buttonText: Phaser.GameObjects.Text;
+    protected buttonImage: Phaser.GameObjects.Image;
 
     constructor(scene: Phaser.Scene, x: number, y: number, text: string)
     {
@@ -39,7 +39,7 @@ export class WELLY_TextButton extends Phaser.GameObjects.Container
             hitArea: new Phaser.Geom.Rectangle(0, 0, this.displayWidth, this.displayHeight),
             hitAreaCallback: Phaser.Geom.Rectangle.Contains,
             pixelPerfect: true,
-            cursor: "url(assets/cursors/icono-selectedstatic.cur), pointer"
+            cursor: "url(assets/cursors/cursorWellyHovered.cur), pointer"
         });
 
         // Behaviors
