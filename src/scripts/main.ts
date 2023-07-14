@@ -11,7 +11,7 @@ document.body.style.overflow = "hidden";
 new Phaser.Game({
     type: Phaser.AUTO,
     scale: {
-        mode: Phaser.Scale.MAX_ZOOM,
+        mode: Phaser.Scale.ENVELOP,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
     width: window.innerWidth,
