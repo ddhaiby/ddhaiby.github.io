@@ -128,6 +128,10 @@ export class WELLY_ImageButton extends Phaser.GameObjects.Image
                 {
                     this.setTexture(this.textureHovered);
                 }
+                else if (this.textureNormal && (this.textureNormal != this.texture.key) && (this.textureNormal != "__DEFAULT")  && (this.textureNormal != "__MISSING"))
+                {
+                    this.setTexture(this.textureNormal);
+                }
 
                 this.isPressed = false;
                 this.isHovered = true;
