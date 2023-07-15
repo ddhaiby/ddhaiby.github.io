@@ -3,6 +3,7 @@ import { WELLY_Scene, SceneData } from "./WELLY_Scene";
 import { WELLY_ToolTip } from "../HUD/WELLY_ToolTip";
 import { WELLY_ImageButton } from "../HUD/WELLY_ImageButton";
 import { WELLY_Utils } from "../Utils/WELLY_Utils";
+import { WELLY_TextButton } from "../HUD/WELLY_TextButton";
 
 export class SceneUI extends WELLY_Scene
 {
@@ -64,7 +65,7 @@ export class SceneUI extends WELLY_Scene
         this.UIContainer = this.add.container(0, 0);
         this.UIContainer.setScale(CST.GAME.SCALE);
 
-        this.chronoText = this.add.text(this.scale.displaySize.width * 0.5 / CST.GAME.SCALE, 40 / CST.GAME.SCALE, WELLY_Scene.formatTime(0), { fontFamily: CST.STYLE.TEXT.FONT_FAMILY, fontSize: "60px", color: CST.STYLE.COLOR.LIGHT_BLUE, align: "center" }).setOrigin(0.5, 0);
+        this.chronoText = this.add.text(this.scale.displaySize.width * 0.5 / CST.GAME.SCALE, 20 / CST.GAME.SCALE, WELLY_Scene.formatTime(0), { fontFamily: CST.STYLE.TEXT.FONT_FAMILY, fontSize: "60px", color: CST.STYLE.COLOR.LIGHT_BLUE, align: "center" }).setOrigin(0.5, 0);
         this.chronoTextY = this.chronoText.y;
         this.UIContainer.add(this.chronoText);
 
@@ -83,6 +84,22 @@ export class SceneUI extends WELLY_Scene
         this.victoryText = this.add.text(this.victoryImage.x, this.victoryImage.y + this.victoryImage.displayHeight * 0.5 + 20  / CST.GAME.SCALE, " WELLY VICTORY ", { fontFamily: CST.STYLE.TEXT.FONT_FAMILY, fontSize: "104px", color: CST.STYLE.COLOR.ORANGE, align: "center" }).setOrigin(0.5, 0);
         this.victoryText.setVisible(false);
         this.UIContainer.add(this.victoryText);
+
+        const iconSpacing = 12 / CST.GAME.SCALE;
+
+        const iconDiscord = new WELLY_ImageButton(this, 0, 0, "discordButtonNormal", undefined, { pixelPerfect: true, texturePressed: "discordButtonPressed", outlineThichkess: 0, tintHovered: 0xFFFFFF, tintPressed: 0xFFFFFF });
+        iconDiscord.setOrigin(0.5, 1);
+        iconDiscord.setX((this.scale.displaySize.width * 0.5) / CST.GAME.SCALE - iconSpacing * 0.5 - iconDiscord.displayWidth * 0.5);
+        iconDiscord.setY((this.scale.displaySize.height - iconSpacing) / CST.GAME.SCALE );
+        iconDiscord.setToolTipText("Join Welly Discord!");
+        iconDiscord.onClicked(() => { window.open("https://discord.com/invite/welly"); }, this);
+        this.UIContainer.add(iconDiscord);
+
+        const iconTwitter = new WELLY_ImageButton(this, iconDiscord.x + iconDiscord.displayWidth * 0.5 + iconSpacing, iconDiscord.y, "twitterButtonNormal", undefined, { pixelPerfect: true, texturePressed: "twitterButtonPressed", outlineThichkess: 0, tintHovered: 0xFFFFFF, tintPressed: 0xFFFFFF });
+        iconTwitter.setOrigin(0, 1);
+        // iconTwitter.setToolTipText("Join Welly Twitter!");
+        iconTwitter.onClicked(() => { window.open("https://twitter.com/wellyfriends"); }, this);
+        this.UIContainer.add(iconTwitter);
     }
 
     private createToolTip(): void

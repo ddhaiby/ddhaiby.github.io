@@ -22,6 +22,7 @@ export class ScenePreloadAssets extends Phaser.Scene
     public preload() : void
     {
         this.preloadAudio();
+        this.preloadButtons();
         this.preloadBackground();
         this.preloadCard();
     }
@@ -30,6 +31,15 @@ export class ScenePreloadAssets extends Phaser.Scene
     {
         this.load.setPath("./assets/audio/");
         // this.load.audio("GUINEA PIGS CITY", "GUINEA PIGS CITY.mp3");
+    }
+
+    private preloadButtons(): void
+    {
+        this.load.setPath("./assets/buttons/");
+        this.load.image("discordButtonNormal", "discordButtonNormal.png");
+        this.load.image("discordButtonPressed", "discordButtonPressed.png");
+        this.load.image("twitterButtonNormal", "twitterButtonNormal.png");
+        this.load.image("twitterButtonPressed", "twitterButtonPressed.png");
     }
 
     private preloadBackground(): void
