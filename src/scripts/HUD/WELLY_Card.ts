@@ -9,8 +9,8 @@ export class WELLY_Card extends PerspectiveCard
     constructor(scene: Phaser.Scene, id: number, x: number, y: number, frontTexture: string, backTexture: string, cardSize: number)
     {
         const frontImageButton = new WELLY_ImageButton(scene, 0, 0, frontTexture);
-        const frontCardButton = new Label(scene, { background: frontImageButton });
-        const backCardButton = new Label(scene, { background: scene.add.image(0, 0, backTexture) });
+        const frontCardButton = new Label(scene, { icon: frontImageButton, iconSize: cardSize, width: cardSize, height:cardSize });
+        const backCardButton = new Label(scene, { icon: scene.add.image(0, 0, backTexture), iconSize: cardSize, width: cardSize, height:cardSize });
 
         const config: PerspectiveCard.IConfig = {
             x: x,
