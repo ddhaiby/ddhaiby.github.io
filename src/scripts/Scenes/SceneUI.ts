@@ -6,6 +6,8 @@ import { WELLY_Utils } from "../Utils/WELLY_Utils";
 
 export class SceneUI extends WELLY_Scene
 {
+    private UIContainer: Phaser.GameObjects.Container; 
+
     private toolTip: WELLY_ToolTip;
     private tooltTipTimerEvent: Phaser.Time.TimerEvent;
 
@@ -59,20 +61,28 @@ export class SceneUI extends WELLY_Scene
         this.preventClickBackground.fillRect(0, 0, this.scale.displaySize.width, this.scale.displaySize.height);
         this.preventClickBackground.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.scale.displaySize.width, this.scale.displaySize.height), Phaser.Geom.Rectangle.Contains);
 
-        this.chronoText = this.add.text(this.scale.displaySize.width * 0.5, 48, WELLY_Scene.formatTime(0), { fontFamily: CST.STYLE.TEXT.FONT_FAMILY, fontSize: "60px", color: CST.STYLE.COLOR.LIGHT_BLUE, align: "center" }).setOrigin(0.5, 0);
-        this.chronoTextY = this.chronoText.y;
+        this.UIContainer = this.add.container(0, 0);
+        this.UIContainer.setScale(CST.GAME.SCALE);
 
-        this.countdownStartGameText = this.add.text(this.scale.displaySize.width * 0.5, this.scale.displaySize.height * 0.5, "", { fontFamily: CST.STYLE.TEXT.FONT_FAMILY, fontSize: "130px", color: CST.STYLE.COLOR.LIGHT_BLUE, align: "center" }).setOrigin(0.5);
-        
+        this.chronoText = this.add.text(this.scale.displaySize.width * 0.5 / CST.GAME.SCALE, 40 / CST.GAME.SCALE, WELLY_Scene.formatTime(0), { fontFamily: CST.STYLE.TEXT.FONT_FAMILY, fontSize: "60px", color: CST.STYLE.COLOR.LIGHT_BLUE, align: "center" }).setOrigin(0.5, 0);
+        this.chronoTextY = this.chronoText.y;
+        this.UIContainer.add(this.chronoText);
+
+        this.countdownStartGameText = this.add.text(this.scale.displaySize.width * 0.5 / CST.GAME.SCALE, this.scale.displaySize.height * 0.5 / CST.GAME.SCALE, "", { fontFamily: CST.STYLE.TEXT.FONT_FAMILY, fontSize: "130px", color: CST.STYLE.COLOR.LIGHT_BLUE, align: "center" }).setOrigin(0.5);
+        this.UIContainer.add(this.countdownStartGameText);
+
         this.congratulationText = this.add.text(0, 0, "CONGRATULATIONS!", { fontFamily: CST.STYLE.TEXT.FONT_FAMILY, fontSize: "110px", color: CST.STYLE.COLOR.ORANGE, align: "center" }).setOrigin(0.5);
         this.congratulationText.setVisible(false);
+        this.UIContainer.add(this.congratulationText);
 
-        this.victoryImage = this.add.image(this.scale.displaySize.width * 0.5, this.scale.displaySize.height * 0.5, "backgroundVictory");
+        this.victoryImage = this.add.image(this.scale.displaySize.width * 0.5 / CST.GAME.SCALE, this.scale.displaySize.height * 0.5 / CST.GAME.SCALE, "backgroundVictory");
         this.victoryImage.setScale(0.2);
         this.victoryImage.setVisible(false);
+        this.UIContainer.add(this.victoryImage);
 
-        this.victoryText = this.add.text(this.victoryImage.x, this.victoryImage.y + this.victoryImage.displayHeight * 0.5 + 20, "WELLY VICTORY", { fontFamily: CST.STYLE.TEXT.FONT_FAMILY, fontSize: "110px", color: CST.STYLE.COLOR.ORANGE, align: "center" }).setOrigin(0.5, 0);
+        this.victoryText = this.add.text(this.victoryImage.x, this.victoryImage.y + this.victoryImage.displayHeight * 0.5 + 20  / CST.GAME.SCALE, " WELLY VICTORY ", { fontFamily: CST.STYLE.TEXT.FONT_FAMILY, fontSize: "104px", color: CST.STYLE.COLOR.ORANGE, align: "center" }).setOrigin(0.5, 0);
         this.victoryText.setVisible(false);
+        this.UIContainer.add(this.victoryText);
     }
 
     private createToolTip(): void
@@ -162,11 +172,11 @@ export class SceneUI extends WELLY_Scene
     {
         this.tweens.add({
             targets: this.chronoText,
-            y: this.scale.displaySize.height * 0.5,
+            y: this.scale.displaySize.height * 0.5 / CST.GAME.SCALE,
             scale: 1.5,
             duration: 300,
             onComplete: () => {
-                this.congratulationText.setPosition(this.chronoText.x, this.chronoText.y - 80);
+                this.congratulationText.setPosition(this.chronoText.x, this.chronoText.y - 80 / CST.GAME.SCALE);
                 this.congratulationText.setText(CST.GAME.LEVELS[level].MESSAGE_END);
                 this.congratulationText.setScale(0);
                 this.congratulationText.setVisible(true);

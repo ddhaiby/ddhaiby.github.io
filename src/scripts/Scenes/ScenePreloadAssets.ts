@@ -75,11 +75,13 @@ export class ScenePreloadAssets extends Phaser.Scene
 
     private initDimensions(): void
     {
-        // Base the scaling on the background and the screen size size all assets are size matching
-        // const widthScale = this.scale.displaySize.width / this.textures.get("background").getSourceImage().width;
-        // const heightScale = this.scale.displaySize.height / this.textures.get("background").getSourceImage().height;
-        // // CST.GAME.SCALE = Math.min(widthScale, heightScale);
-        // CST.GAME.WIDTH = this.textures.get("background").getSourceImage().width * CST.GAME.SCALE;
-        // CST.GAME.HEIGHT = this.textures.get("background").getSourceImage().height * CST.GAME.SCALE;
+        const baseWidth =  840;
+        const baseHeight =  740;
+        const widthScale = this.scale.displaySize.width / baseWidth;
+        const heightScale = this.scale.displaySize.height / baseHeight;
+
+        CST.GAME.SCALE = Math.min(1, widthScale, heightScale);
+        CST.GAME.WIDTH = baseWidth * CST.GAME.SCALE;
+        CST.GAME.HEIGHT = baseHeight * CST.GAME.SCALE;
     }
 }

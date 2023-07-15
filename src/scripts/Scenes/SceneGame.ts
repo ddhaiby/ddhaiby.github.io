@@ -91,11 +91,11 @@ export class SceneGame extends WELLY_Scene
             availableCards.push({index: i, count: 2});
         }
 
-        const spacing = 16;
-        const cardSize = 120;
+        const spacing = 16 * CST.GAME.SCALE;
+        const cardSize = 120 * CST.GAME.SCALE;
 
-        const childrenRectWidth = columns * cardSize + (columns - 1) * spacing;
-        const childrenRectHeight = rows * cardSize + (rows - 1) * spacing;
+        const childrenRectWidth = columns * cardSize + (columns - 3) * spacing;
+        const childrenRectHeight = rows * cardSize + (rows + 4) * spacing;
 
         const startX = (this.scale.displaySize.width - childrenRectWidth) * 0.5 + cardSize * 0.5;
         const startY = (this.scale.displaySize.height - childrenRectHeight) * 0.5 + cardSize;
